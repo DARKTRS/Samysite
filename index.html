@@ -635,8 +635,7 @@ h1,h2,h3,p{margin:0}
   requestAnimationFrame(() => requestAnimationFrame(() => root.classList.add('is-in')));
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* Efeitos de rolagem (mão dupla): aparecem ao descer e se desfazem, ao contrário, ao subir de volta
-     — a linha de gatilho é a mesma nos dois sentidos (80% da altura da tela) */
+  /* Efeitos de rolagem (mão dupla): aparecem ao descer e se desfazem, ao contrário, ao subir de volta */
   const cards = document.getElementById('cards');
   const about = document.querySelector('.about-card');
   const ctaPanel = document.querySelector('.cta-panel');
@@ -653,12 +652,25 @@ h1,h2,h3,p{margin:0}
     el.classList.toggle(el === depo ? 'shown' : 'drawn', on);
   }
   cards.classList.add('deal');
-  if ('IntersectionObserver' in window && !reduce) {
-    const io = new IntersectionObserver(es => es.forEach(e => {
-      if (e.isIntersecting) setOn(e.target, true);
-      else if (e.boundingClientRect.top > 0) setOn(e.target, false);   // saiu por baixo = a pessoa subiu a página
-    }), {rootMargin: '0px 0px -20% 0px', threshold: 0});
-    [about, cards, depo, ctaPanel].forEach(el => io.observe(el));
+  const fx = [about, cards, depo, ctaPanel];
+  if (!reduce) {
+    /* Segue a direção da rolagem: descendo, aparece quando o topo passa de 85% da tela;
+       subindo, se desfaz quando o topo volta para baixo de 60% — ainda bem visível na tela */
+    const state = new Map(fx.map(el => [el, false]));
+    let lastY = scrollY, fxRaf = 0;
+    function check(){
+      fxRaf = 0;
+      const y = scrollY, dir = y - lastY, vh = innerHeight;
+      lastY = y;
+      fx.forEach(el => {
+        const r = el.getBoundingClientRect(), on = state.get(el);
+        if (!on && r.top < vh * .85 && r.bottom > 0 && dir >= 0) { state.set(el, true); setOn(el, true); }
+        else if (on && dir < 0 && r.top > vh * .6) { state.set(el, false); setOn(el, false); }
+      });
+    }
+    addEventListener('scroll', () => { if (!fxRaf) fxRaf = requestAnimationFrame(check); }, {passive: true});
+    addEventListener('resize', () => { if (!fxRaf) fxRaf = requestAnimationFrame(check); });
+    check();
   } else { cards.classList.remove('deal'); cards.classList.add('dealt'); about.classList.add('drawn'); ctaPanel.classList.add('drawn'); depo.classList.add('shown'); }
 
   /* Carrossel (manual, sem rotação automática) */
