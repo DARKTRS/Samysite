@@ -176,6 +176,8 @@ h1,h2,h3,p{margin:0}
   transform:rotate(var(--r)) scale(.7);opacity:0;transition:transform .45s var(--ease-back),opacity .3s}
 .drawn .tape{opacity:1;transform:rotate(var(--r))}
 .about-card .tape.t1{--r:-36deg;top:calc(-6 * var(--u));left:calc(-34 * var(--u));transition-delay:.75s}
+.about-card:not(.drawn) .tape.tape{transition-duration:.3s;transition-delay:0s}
+.js .about-card:not(.drawn){transition:transform .6s cubic-bezier(.55,0,.75,.2) .3s,opacity .45s ease .35s}
 .about-card .tape.t2{--r:33deg;top:calc(-4 * var(--u));right:calc(-32 * var(--u));transition-delay:.9s}
 
 /* ===== Projetos ===== */
@@ -210,6 +212,7 @@ h1,h2,h3,p{margin:0}
 .cards.deal:not(.dealt) .pcard{--ty:calc(80 * var(--u));--rot:0deg;opacity:0}
 .cards.deal:not(.dealt) .pcard.c1{--tx:calc(318 * var(--u))}
 .cards.deal:not(.dealt) .pcard.c3{--tx:calc(-318 * var(--u))}
+.cards.deal:not(.dealt) .pcard.c3{transition-delay:0s}.cards.deal:not(.dealt) .pcard.c2{transition-delay:.08s}.cards.deal:not(.dealt) .pcard.c1{transition-delay:.16s}
 .cards.dealt .pcard.c1{transition-delay:.05s}.cards.dealt .pcard.c2{transition-delay:.18s}.cards.dealt .pcard.c3{transition-delay:.3s}
 
 /* ===== Carrossel ===== */
@@ -277,6 +280,8 @@ h1,h2,h3,p{margin:0}
 .testimonials.shown .big-word{-webkit-mask-position:0 0;mask-position:0 0}
 .js .tcard{opacity:0;translate:0 calc(46 * var(--u));transition:opacity .7s ease,translate 1s var(--ease)}
 .testimonials.shown .tcard{opacity:1;translate:0 0}
+.testimonials:not(.shown) .big-word{transition-delay:.35s}
+.testimonials:not(.shown) .tcard:nth-child(3){transition-delay:0s}.testimonials:not(.shown) .tcard:nth-child(2){transition-delay:.1s}.testimonials:not(.shown) .tcard:nth-child(1){transition-delay:.2s}
 .testimonials.shown .tcard:nth-child(1){transition-delay:.75s}
 .testimonials.shown .tcard:nth-child(2){transition-delay:.9s}
 .testimonials.shown .tcard:nth-child(3){transition-delay:1.05s}
@@ -289,6 +294,7 @@ h1,h2,h3,p{margin:0}
 .cta-copy{text-align:center;padding-left:calc(14 * var(--u))}
 .cta-copy h2 .burst{position:absolute;right:-.42em;top:.02em;width:.46em;height:.46em;color:#5f0000}
 .cta-copy h2 .burst path{stroke-width:2.6}
+.cta-copy h2 .burst path{transition:stroke-dashoffset .25s ease-in}
 .cta-panel.drawn .burst path{stroke-dashoffset:0;transition:stroke-dashoffset .35s ease-out .3s}
 .cta-panel.drawn .burst path:nth-child(2){transition-delay:.45s}.cta-panel.drawn .burst path:nth-child(3){transition-delay:.6s}
 .cta-copy h2{position:relative;display:inline-block;font-size:calc(52 * var(--u));font-weight:700;font-style:italic;color:#5f0000;letter-spacing:-.01em;line-height:1.2}
@@ -629,25 +635,30 @@ h1,h2,h3,p{margin:0}
   requestAnimationFrame(() => requestAnimationFrame(() => root.classList.add('is-in')));
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* Momento: cartas dadas uma vez; seta do "Sobre mim" desenhada */
+  /* Efeitos de rolagem (mão dupla): aparecem ao descer e se desfazem, ao contrário, ao subir de volta
+     — a linha de gatilho é a mesma nos dois sentidos (80% da altura da tela) */
   const cards = document.getElementById('cards');
   const about = document.querySelector('.about-card');
   const ctaPanel = document.querySelector('.cta-panel');
   const depo = document.getElementById('depoimentos');
+  let dealTimer = 0;
+  function setOn(el, on){
+    if (el === cards){
+      clearTimeout(dealTimer);
+      cards.classList.add('deal');
+      cards.classList.toggle('dealt', on);
+      if (on) dealTimer = setTimeout(() => cards.classList.remove('deal'), 1500);
+      return;
+    }
+    el.classList.toggle(el === depo ? 'shown' : 'drawn', on);
+  }
   cards.classList.add('deal');
   if ('IntersectionObserver' in window && !reduce) {
     const io = new IntersectionObserver(es => es.forEach(e => {
-      if (!e.isIntersecting) return;
-      e.target.classList.add(e.target === cards ? 'dealt' : 'drawn');
-      if (e.target === cards) setTimeout(() => cards.classList.remove('deal'), 1500);
-      io.unobserve(e.target);
-    }), {threshold: .35});
-    io.observe(cards); io.observe(about); io.observe(ctaPanel);
-    const io2 = new IntersectionObserver(es => es.forEach(e => {
-      if (!e.isIntersecting) return;
-      e.target.classList.add('shown'); io2.unobserve(e.target);
-    }), {rootMargin: '0px 0px -22% 0px'});
-    io2.observe(depo);
+      if (e.isIntersecting) setOn(e.target, true);
+      else if (e.boundingClientRect.top > 0) setOn(e.target, false);   // saiu por baixo = a pessoa subiu a página
+    }), {rootMargin: '0px 0px -20% 0px', threshold: 0});
+    [about, cards, depo, ctaPanel].forEach(el => io.observe(el));
   } else { cards.classList.remove('deal'); cards.classList.add('dealt'); about.classList.add('drawn'); ctaPanel.classList.add('drawn'); depo.classList.add('shown'); }
 
   /* Carrossel (manual, sem rotação automática) */
