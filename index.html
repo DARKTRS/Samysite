@@ -367,6 +367,7 @@ h1,h2,h3,p{margin:0}
   .cta-actions{padding-top:0;gap:18px}
 }
 @media (max-width:720px){
+  .projects .big-word{font-size:20vw;margin-left:0}
   .js .about-card{transform:translateY(18px)}
   .js .about-card.drawn{transform:none}
   .about-card .tape.t1{left:-10px;top:-12px;--r:-28deg;width:96px;height:30px}
@@ -751,7 +752,10 @@ h1,h2,h3,p{margin:0}
     if (reduce) return;
     const pr = projects.getBoundingClientRect();
     const pp = Math.min(1, Math.max(0, (vh - pr.top) / (vh + pr.height)));
-    bigWord.style.setProperty('--slide', `${(0.5 - pp) * 140}px`);
+    // no celular a palavra fica inteira na tela: desliza só o espaço que sobra nas laterais
+    const amp = innerWidth < 720 ? Math.max(0, innerWidth - bigWord.offsetWidth - 24) : 140;
+    const start = innerWidth < 720 ? 0 : 0.5;              // celular: entra centralizada e só desliza para a esquerda
+    bigWord.style.setProperty('--slide', `${(start - pp) * amp}px`);
   }
   addEventListener('scroll', () => { if (!ticking){ ticking = true; requestAnimationFrame(updateScroll); } }, {passive:true});
   updateScroll();
