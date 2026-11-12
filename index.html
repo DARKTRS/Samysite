@@ -369,6 +369,9 @@ h1,h2,h3,p{margin:0}
   .cta-actions{padding-top:0;gap:18px}
 }
 @media (max-width:720px){
+  /* carrossel: leque mais fechado para as folhas não passarem da borda do card */
+  .sheet[data-pos="back-l"]{transform:translate(-24px,8px) rotate(-6deg)}
+  .sheet[data-pos="back-r"]{transform:translate(38px,6px) rotate(6.5deg)}
   .projects .big-word{font-size:20vw;margin-left:0}
   .js .about-card{transform:translateY(18px)}
   .js .about-card.drawn{transform:none}
