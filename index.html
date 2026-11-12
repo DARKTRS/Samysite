@@ -167,7 +167,7 @@ h1,h2,h3,p{margin:0}
 .about-card.drawn .doodle path{stroke-dashoffset:0}
 .about-card .body{margin:calc(22 * var(--u)) auto 0;max-width:calc(362 * var(--u));font-size:calc(20.5 * var(--u));line-height:1.24;color:#2a2a2a}
 .about-card .body p+p{margin-top:calc(25 * var(--u))}
-.js .about-card{opacity:0;transform:translateY(calc(-22 * var(--u))) rotate(-2.5deg) scale(1.025);transition:transform .95s var(--ease-back),opacity .45s}
+.js .about-card{opacity:0;transform:translateY(calc(-22 * var(--u))) rotate(-2deg);transition:transform .95s var(--ease-back),opacity .45s}
 .js .about-card.drawn{opacity:1;transform:none}
 .tape{position:absolute;width:calc(118 * var(--u));height:calc(34 * var(--u));z-index:2;pointer-events:none;
   background:linear-gradient(180deg,rgba(231,220,196,.93),rgba(214,200,171,.93)),repeating-linear-gradient(90deg,rgba(255,255,255,.07) 0 2px,transparent 2px calc(7 * var(--u)));
@@ -329,7 +329,7 @@ h1,h2,h3,p{margin:0}
   .hero{min-height:100svh;display:flex;flex-direction:column;align-items:stretch;padding:0}
   .hero-photo{position:relative;inset:auto;left:auto;flex:none;width:100%;height:clamp(220px,calc(100svh - 380px),64svh);aspect-ratio:auto}
   .hero-photo .ph{-webkit-mask-image:linear-gradient(180deg,#000 58%,transparent 100%);mask-image:linear-gradient(180deg,#000 58%,transparent 100%)}
-  .hero-photo img{object-position:60% 32%}
+  .hero-photo img{object-position:60% 32%;transform:none}
   .hero .wrap{flex:1;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;width:min(873px,100% - 44px);
     padding:clamp(8px,2.5svh,28px) 0 calc(clamp(28px,5svh,56px) + env(safe-area-inset-bottom))}
   .hero-text{max-width:560px;margin-top:0}
@@ -367,6 +367,10 @@ h1,h2,h3,p{margin:0}
   .cta-actions{padding-top:0;gap:18px}
 }
 @media (max-width:720px){
+  .js .about-card{transform:translateY(18px)}
+  .js .about-card.drawn{transform:none}
+  .about-card .tape.t1{left:-10px;top:-12px;--r:-28deg;width:96px;height:30px}
+  .about-card .tape.t2{right:-10px;top:-10px;--r:26deg;width:96px;height:30px}
   .about-grid{grid-template-columns:1fr;gap:22px}
   .skills{order:2;grid-template-rows:none}
   .about-card{padding:58px 30px 60px}
