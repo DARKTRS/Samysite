@@ -226,6 +226,47 @@ h1,h2,h3,p{margin:0}
 .sheet[data-pos="back-l"]{transform:translate(calc(-36 * var(--u)),calc(10 * var(--u))) rotate(-8deg);z-index:1}
 .sheet[data-pos="back-r"]{transform:translate(calc(70 * var(--u)),calc(6 * var(--u))) rotate(9.5deg);z-index:2}
 .sheet[data-pos="front"]{transform:none;z-index:3}
+/* ===== Carrossel em formato de post do Instagram ===== */
+.sheet{background:#fbf9f3;border-radius:calc(10 * var(--u));overflow:hidden;display:flex;flex-direction:column;color:#262626;font-size:calc(12 * var(--u));line-height:1.3}
+.sheet.s-red,.sheet.s-black,.sheet.s-cream{background:#fbf9f3}
+.post-head{display:flex;align-items:center;gap:calc(9 * var(--u));padding:calc(10 * var(--u)) calc(12 * var(--u));flex:none}
+.post-av{width:calc(28 * var(--u));height:calc(28 * var(--u));border-radius:50%;padding:calc(2 * var(--u));background:linear-gradient(135deg,#700000,#d9b38c);flex:none}
+.post-av span{display:grid;place-items:center;width:100%;height:100%;border-radius:50%;background:#111;border:calc(2 * var(--u)) solid #fbf9f3;color:#ebe7d7;font-size:calc(9 * var(--u));font-weight:700;font-style:italic;letter-spacing:-.02em}
+.post-id{display:flex;flex-direction:column;min-width:0;flex:1}
+.post-id b{font-weight:700;font-size:calc(12 * var(--u));color:#1d1d1d}
+.post-id small{font-size:calc(10.5 * var(--u));color:#6b6b6b}
+.post-more{width:calc(18 * var(--u));height:calc(18 * var(--u));color:#3a3a3a;flex:none}
+.post-media{position:relative;flex:none;height:calc(218 * var(--u));overflow:hidden;display:grid;place-items:center;text-align:center;user-select:none}
+.post-media .art{font-size:calc(31 * var(--u));line-height:1.05;letter-spacing:-.01em;font-style:italic}
+.post-media .art .lt{font-weight:300} .post-media .art .bd{font-weight:700}
+.s-cream .post-media{background:#e8e3d2;color:#700000}
+.s-cream .post-media::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(150,130,100,.18) 1px,transparent 1px),linear-gradient(90deg,rgba(150,130,100,.18) 1px,transparent 1px);background-size:calc(18 * var(--u)) calc(18 * var(--u))}
+.s-cream .post-media .art{position:relative}
+.s-cream .post-media .art::after{content:"";display:block;width:62%;height:calc(3 * var(--u));margin:calc(8 * var(--u)) auto 0;border-radius:2px;background:#8c1111;transform:rotate(-2deg)}
+.s-red .post-media{background:radial-gradient(120% 90% at 20% 10%,#7a0606,#4a0000 70%);color:#f3eee0}
+.s-red .post-media .grid{position:absolute;inset:calc(14 * var(--u));display:grid;grid-template-columns:repeat(3,1fr);gap:calc(4 * var(--u));opacity:.16}
+.s-red .post-media .grid i{background:#f3eee0;border-radius:calc(2 * var(--u))}
+.s-red .post-media .art{position:relative}
+.s-black .post-media{background:linear-gradient(160deg,#1c1c1c,#0b0b0b);color:#ebe7d7}
+.s-black .post-media .play{position:absolute;right:calc(14 * var(--u));bottom:calc(14 * var(--u));width:calc(34 * var(--u));height:calc(34 * var(--u));border-radius:50%;border:calc(1.5 * var(--u)) solid rgba(235,231,215,.8);display:grid;place-items:center}
+.s-black .post-media .play::after{content:"";margin-left:calc(3 * var(--u));border-left:calc(11 * var(--u)) solid #ebe7d7;border-top:calc(7 * var(--u)) solid transparent;border-bottom:calc(7 * var(--u)) solid transparent}
+.s-black .post-media .bar{position:absolute;left:calc(14 * var(--u));right:calc(60 * var(--u));bottom:calc(30 * var(--u));height:calc(2 * var(--u));background:rgba(235,231,215,.25);border-radius:2px}
+.s-black .post-media .bar::after{content:"";position:absolute;inset:0 62% 0 0;background:#9c1a1a;border-radius:2px}
+.post-pop{position:absolute;left:50%;top:50%;width:calc(74 * var(--u));height:calc(74 * var(--u));margin:calc(-37 * var(--u)) 0 0 calc(-37 * var(--u));color:#fff;opacity:0;transform:scale(.3);pointer-events:none;filter:drop-shadow(0 4px 10px rgba(0,0,0,.35))}
+.post-pop.go{animation:pop .9s var(--ease-back)}
+@keyframes pop{0%{opacity:0;transform:scale(.3)}25%{opacity:1;transform:scale(1.1)}45%{transform:scale(.95)}75%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1)}}
+.post-actions{display:flex;align-items:center;gap:calc(4 * var(--u));padding:calc(4 * var(--u)) calc(6 * var(--u)) 0;flex:none}
+.post-actions svg{width:calc(22 * var(--u));height:calc(22 * var(--u));fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.post-actions .ic{display:grid;place-items:center;width:calc(32 * var(--u));height:calc(32 * var(--u));color:#262626}
+.post-actions .save{margin-left:auto}
+.like{border-radius:50%;transition:transform .2s var(--ease)}
+.like:active{transform:scale(.88)}
+.like.liked{color:#c4161c} .like.liked svg{fill:currentColor;animation:beat .45s var(--ease-back)}
+@keyframes beat{0%{transform:scale(.6)}60%{transform:scale(1.2)}100%{transform:scale(1)}}
+.post-likes{padding:0 calc(12 * var(--u));font-weight:700;font-size:calc(11.5 * var(--u));flex:none}
+.post-cap{padding:calc(3 * var(--u)) calc(12 * var(--u)) 0;font-size:calc(11.5 * var(--u));color:#333;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.post-cap b{font-weight:700;color:#1d1d1d;margin-right:.3em}
+.sheet:not([data-pos="front"]) .post-actions,.sheet:not([data-pos="front"]) .post-media{pointer-events:none}
 .dots{position:absolute;left:calc(151 * var(--u));top:calc(440 * var(--u));width:calc(137 * var(--u));height:calc(3 * var(--u));background:rgba(0,0,0,.18);border-radius:2px;overflow:hidden}
 .dots i{position:absolute;inset:0 auto 0 0;width:33.34%;background:#111;border-radius:2px;transition:transform .6s var(--ease)}
 .slide-text{padding:0 calc(64 * var(--u)) 0 calc(30 * var(--u));text-align:center}
@@ -371,8 +412,8 @@ h1,h2,h3,p{margin:0}
   .showcase{padding-bottom:96px}
   .light{padding-top:56px}
   /* carrossel: leque mais fechado para as folhas não passarem da borda do card */
-  .sheet[data-pos="back-l"]{transform:translate(-24px,8px) rotate(-6deg)}
-  .sheet[data-pos="back-r"]{transform:translate(38px,6px) rotate(6.5deg)}
+  .sheet[data-pos="back-l"]{transform:translate(-16px,8px) rotate(-4.5deg)}
+  .sheet[data-pos="back-r"]{transform:translate(22px,6px) rotate(4.5deg)}
   .projects .big-word{font-size:20vw;margin-left:0}
   .js .about-card{transform:translateY(18px)}
   .js .about-card.drawn{transform:none}
@@ -400,7 +441,7 @@ h1,h2,h3,p{margin:0}
   .pcard{width:min(286px,100% - 20px);height:316px}
   .pcard h3{font-size:34px}
   .pcard .pill{font-size:27px;width:210px}
-  .stack{height:400px;transform:scale(.74);transform-origin:50% 0;margin-bottom:-66px}
+  .stack{height:400px;transform:scale(.88);transform-origin:50% 0;margin-bottom:10px}
   .sheet{left:calc(50% - 148px)}
   .dots{left:calc(50% - 68px)}
   .slide-text{padding:0 40px}
@@ -430,7 +471,7 @@ h1,h2,h3,p{margin:0}
 @media (max-width:380px){
   .hero h1{font-size:33px}
   .chip{font-size:23px;padding:6px 12px;min-height:54px}
-  .stack{transform:scale(.64);margin-bottom:-120px}
+  .stack{transform:scale(.7);margin-bottom:-60px}
   .light h2.label,.cta-copy h2{font-size:38px}
 }
 @media (prefers-reduced-motion:reduce){
@@ -526,12 +567,45 @@ h1,h2,h3,p{margin:0}
     <section class="showcase" id="vitrine" aria-label="Projetos por cliente">
       <div class="wrap">
         <div class="panel grid-paper" aria-roledescription="carrossel">
-          <!-- Substitua as folhas pelas capas reais dos projetos (imagens) quando tiver os arquivos -->
-          <div class="stack" aria-hidden="true">
-            <div class="sheet s-red" data-pos="back-l"></div>
-            <div class="sheet s-black" data-pos="back-r"></div>
-            <div class="sheet s-cream" data-pos="front"></div>
-            <div class="dots"><i id="dotbar"></i></div>
+          <!-- Posts provisórios: troque a arte de cada .post-media pela imagem real do projeto -->
+          <div class="stack">
+            <article class="sheet s-red" data-pos="back-l">
+              <header class="post-head"><span class="post-av" aria-hidden="true"><span>SV</span></span><span class="post-id"><b>samyviana.design</b><small>Social Media</small></span><svg class="post-more" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg></header>
+              <div class="post-media"><span class="grid" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><p class="art"><span class="lt">Social</span><br><span class="bd">Media</span></p><svg class="post-pop" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 20.3s-7.6-4.5-9.3-9.2C1.6 7.9 3.6 4.6 7 4.6c2 0 3.6 1.1 5 3 1.4-1.9 3-3 5-3 3.4 0 5.4 3.3 4.3 6.5-1.7 4.7-9.3 9.2-9.3 9.2Z"/></svg></div>
+              <div class="post-actions">
+                <button class="ic like" type="button" aria-pressed="false" aria-label="Curtir"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.3s-7.6-4.5-9.3-9.2C1.6 7.9 3.6 4.6 7 4.6c2 0 3.6 1.1 5 3 1.4-1.9 3-3 5-3 3.4 0 5.4 3.3 4.3 6.5-1.7 4.7-9.3 9.2-9.3 9.2Z"/></svg></button>
+                <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20.5 11.6a8.4 8.4 0 0 1-12.4 7.4L3.5 20.5l1.5-4.4a8.4 8.4 0 1 1 15.5-4.5Z"/></svg></span>
+                <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M21.5 3 10 14.5M21.5 3l-7 18-4.5-6.5L3.5 10l18-7Z"/></svg></span>
+                <span class="ic save" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M18.5 21 12 16.5 5.5 21V4.5a1.5 1.5 0 0 1 1.5-1.5h10a1.5 1.5 0 0 1 1.5 1.5Z"/></svg></span>
+              </div>
+              <p class="post-likes"><span class="n">214</span> curtidas</p>
+              <p class="post-cap"><b>samyviana.design</b>Calendário de conteúdo e posts para o feed, com a identidade aplicada em cada formato.</p>
+            </article>
+            <article class="sheet s-black" data-pos="back-r">
+              <header class="post-head"><span class="post-av" aria-hidden="true"><span>SV</span></span><span class="post-id"><b>samyviana.design</b><small>Digital &amp; Motion</small></span><svg class="post-more" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg></header>
+              <div class="post-media"><span class="bar" aria-hidden="true"></span><span class="play" aria-hidden="true"></span><p class="art"><span class="lt">Digital &amp;</span><br><span class="bd">Motion</span></p><svg class="post-pop" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 20.3s-7.6-4.5-9.3-9.2C1.6 7.9 3.6 4.6 7 4.6c2 0 3.6 1.1 5 3 1.4-1.9 3-3 5-3 3.4 0 5.4 3.3 4.3 6.5-1.7 4.7-9.3 9.2-9.3 9.2Z"/></svg></div>
+              <div class="post-actions">
+                <button class="ic like" type="button" aria-pressed="false" aria-label="Curtir"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.3s-7.6-4.5-9.3-9.2C1.6 7.9 3.6 4.6 7 4.6c2 0 3.6 1.1 5 3 1.4-1.9 3-3 5-3 3.4 0 5.4 3.3 4.3 6.5-1.7 4.7-9.3 9.2-9.3 9.2Z"/></svg></button>
+                <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20.5 11.6a8.4 8.4 0 0 1-12.4 7.4L3.5 20.5l1.5-4.4a8.4 8.4 0 1 1 15.5-4.5Z"/></svg></span>
+                <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M21.5 3 10 14.5M21.5 3l-7 18-4.5-6.5L3.5 10l18-7Z"/></svg></span>
+                <span class="ic save" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M18.5 21 12 16.5 5.5 21V4.5a1.5 1.5 0 0 1 1.5-1.5h10a1.5 1.5 0 0 1 1.5 1.5Z"/></svg></span>
+              </div>
+              <p class="post-likes"><span class="n">176</span> curtidas</p>
+              <p class="post-cap"><b>samyviana.design</b>Vídeos e animações curtas para reels e campanhas digitais.</p>
+            </article>
+            <article class="sheet s-cream" data-pos="front">
+              <header class="post-head"><span class="post-av" aria-hidden="true"><span>SV</span></span><span class="post-id"><b>samyviana.design</b><small>Identidade Visual</small></span><svg class="post-more" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg></header>
+              <div class="post-media"><p class="art"><span class="lt">Identidade</span><br><span class="bd">Visual</span></p><svg class="post-pop" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 20.3s-7.6-4.5-9.3-9.2C1.6 7.9 3.6 4.6 7 4.6c2 0 3.6 1.1 5 3 1.4-1.9 3-3 5-3 3.4 0 5.4 3.3 4.3 6.5-1.7 4.7-9.3 9.2-9.3 9.2Z"/></svg></div>
+              <div class="post-actions">
+                <button class="ic like" type="button" aria-pressed="false" aria-label="Curtir"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.3s-7.6-4.5-9.3-9.2C1.6 7.9 3.6 4.6 7 4.6c2 0 3.6 1.1 5 3 1.4-1.9 3-3 5-3 3.4 0 5.4 3.3 4.3 6.5-1.7 4.7-9.3 9.2-9.3 9.2Z"/></svg></button>
+                <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20.5 11.6a8.4 8.4 0 0 1-12.4 7.4L3.5 20.5l1.5-4.4a8.4 8.4 0 1 1 15.5-4.5Z"/></svg></span>
+                <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M21.5 3 10 14.5M21.5 3l-7 18-4.5-6.5L3.5 10l18-7Z"/></svg></span>
+                <span class="ic save" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M18.5 21 12 16.5 5.5 21V4.5a1.5 1.5 0 0 1 1.5-1.5h10a1.5 1.5 0 0 1 1.5 1.5Z"/></svg></span>
+              </div>
+              <p class="post-likes"><span class="n">238</span> curtidas</p>
+              <p class="post-cap"><b>samyviana.design</b>Marca completa: logo, paleta, tipografia e manual de aplicação.</p>
+            </article>
+            <div class="dots" aria-hidden="true"><i id="dotbar"></i></div>
           </div>
           <div class="slide-text" id="slideText" aria-live="polite">
             <h3 class="fade" id="slideTitle">cliente</h3>
@@ -717,11 +791,29 @@ h1,h2,h3,p{margin:0}
     sheets[s.front].dataset.pos = 'front';
     sheets[s.l].dataset.pos = 'back-l';
     sheets[s.r].dataset.pos = 'back-r';
+    Object.values(sheets).forEach(el => { const back = el.dataset.pos !== 'front'; el.inert = back; el.setAttribute('aria-hidden', back); });
     bar.style.transform = `translateX(${cur*100}%)`;
     text.classList.add('out');
     setTimeout(() => text.classList.remove('out'), reduce ? 0 : 260);
     document.querySelector('.panel').setAttribute('aria-label', `Projeto ${cur+1} de ${slides.length}`);
   }
+  /* curtir: coração da barra ou toque duplo na imagem */
+  function like(post, force){
+    const btn = post.querySelector('.like'), n = post.querySelector('.post-likes .n');
+    const on = force ?? !btn.classList.contains('liked');
+    if (on === btn.classList.contains('liked')) return;
+    btn.classList.toggle('liked', on); btn.setAttribute('aria-pressed', on);
+    n.textContent = +n.textContent + (on ? 1 : -1);
+  }
+  Object.values(sheets).forEach(post => {
+    post.querySelector('.like').addEventListener('click', () => like(post));
+    const media = post.querySelector('.post-media'), pop = post.querySelector('.post-pop');
+    media.addEventListener('dblclick', () => {
+      like(post, true);
+      if (!reduce){ pop.classList.remove('go'); void pop.offsetWidth; pop.classList.add('go'); }
+    });
+  });
+  show(0);
   document.querySelector('.arrow.prev').addEventListener('click', () => show(cur-1));
   document.querySelector('.arrow.next').addEventListener('click', () => show(cur+1));
   document.querySelectorAll('[data-slide]').forEach(a => a.addEventListener('click', () => show(+a.dataset.slide)));
